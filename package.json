@@ -1,0 +1,13 @@
+{
+  "name": "word-counter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "content.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chrome": "^0.0.322"
+  }
+}
