@@ -11,7 +11,7 @@ document.addEventListener("mouseup", (event) => {
 
     // ポップアップの表示位置を取得
     chrome.storage.local.get("position", (result) => {
-      const position = result.position;
+      const position = result.position || "top";
 
       let top, left;
       switch (position) {
