@@ -7,6 +7,6 @@ document.getElementById("save").onclick = () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   chrome.storage.local.get("position", (result) => {
-    document.getElementById("position").value = result.position || "fixed";
+    document.getElementById("position").value = result.position || "top";
   });
 });
