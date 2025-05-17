@@ -10,7 +10,7 @@ document.addEventListener("mouseup", (event) => {
     if (oldPopup) oldPopup.remove();
 
     // ポップアップの表示位置を取得
-    chrome.storage.local.get(["position","figure_number"], (result) => {
+    chrome.storage.local.get(["position","toggle_figure","figure_number"], (result) => {
 
       if (chrome.runtime.lastError) {
         console.error("Error accessing chrome.storage:", chrome.runtime.lastError);
@@ -18,6 +18,8 @@ document.addEventListener("mouseup", (event) => {
       }
       const position = result.position || "top";
       const figure_number = result.figure_number || 0;
+      //文字数指定を管理する状態変数
+      const toggle_figure = result.toggle_figure || false;
 
       let top, left;
       switch (position) {
@@ -45,8 +47,8 @@ document.addEventListener("mouseup", (event) => {
       popup.style.position = "fixed";
       popup.style.top = top;
       popup.style.left = left;
-      console.log("figure_number:", figure_number);
-      if(figure_number==0){
+
+      if(toggle_figure==false || figure_number==0){
         popup.className = "word-counter-style" ;
       }
       else if(figure_number>count){
