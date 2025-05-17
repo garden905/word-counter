@@ -16,6 +16,7 @@ document.addEventListener("mouseup", (event) => {
         console.error("Error accessing chrome.storage:", chrome.runtime.lastError);
         return;
       }
+      console.log("Storage data:", result);
       const position = result.position || "top";
       const figure_number = result.figure_number || 0;
       //文字数指定を管理する状態変数
