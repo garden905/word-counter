@@ -1,0 +1,161 @@
+/* ポップアップ全体のサイズを指定 */
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 300px; /* ポップアップの幅 */
+  margin: 0;
+  padding: 10px;
+  background-color: #ddd;
+  box-sizing: border-box; /* パディングを含めた幅計算 */
+}
+
+h1,
+h2 {
+  margin: 0;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  box-sizing: content-box;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 4px;
+  gap: 16px;
+}
+
+select,
+button {
+  width: 100%; /* 要素を横幅いっぱいに広げる */
+  margin-bottom: 10px;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 入力フィールド全体 */
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox用 */
+  appearance: textfield;
+
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* フォーカス時のスタイル */
+input[type="number"]:focus {
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+input[type="number"]:hover {
+  border-color: #2196f3;
+}
+
+/* セレクター全体 */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+  background-color: white;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* フォーカス時のスタイル */
+select:focus {
+  border-color: #2196f3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+/* カスタム矢印アイコン */
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+/* ホバー時のスタイル */
+select:hover {
+  border-color: #2196f3;
+}
+
+/* オプションのスタイル */
+select option {
+  padding: 8px;
+  font-size: 16px;
+}
+
+/* トグルスイッチのスタイル */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #4caf54;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}

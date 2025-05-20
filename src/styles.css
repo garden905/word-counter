@@ -1,25 +1,5 @@
-.word-counter-style {
+.word-counter-popup {
   background-color: #333;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 6px;
-  font-size: 14px;
-  z-index: 9999;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-.word-counter-style-figure-incorrect {
-  background-color: #ed1e13;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 6px;
-  font-size: 14px;
-  z-index: 9999;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-.word-counter-style-figure-correct {
-  background-color: #7cf122;
   color: white;
   padding: 5px 10px;
   border-radius: 6px;
