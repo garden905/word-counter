@@ -1,65 +1,83 @@
+function createPopup(top, left, count, threshold) {
+  const popup = document.createElement("div");
+  popup.id = "word-counter-popup";
+  popup.className = "word-counter-popup";
+  popup.textContent = `${count} 文字`;
+  popup.style.position = "fixed";
+  popup.style.top = top;
+  popup.style.left = left;
+  if (typeof threshold === "number") {
+    if (count > threshold) {
+      popup.style.backgroundColor = "#4caf50";
+    } else {
+      popup.style.backgroundColor = "#f44336";
+    }
+  }
+  return popup;
+}
+
+function getSelectionCount() {
+  const selection = window.getSelection();
+  if (!selection) return 0;
+  return selection.toString().length;
+}
+
+function getRect(startX, startY, endX, endY) {
+  return {
+    top: Math.min(startY, endY),
+    left: Math.min(startX, endX),
+    bottom: Math.max(startY, endY),
+    right: Math.max(startX, endX),
+  };
+}
+
+let startX = 0;
+let startY = 0;
+
+document.addEventListener("mousedown", (event) => {
+  startX = event.clientX;
+  startY = event.clientY;
+});
+
 document.addEventListener("mouseup", (event) => {
-  const selectedText = window.getSelection().toString();
-  console.log(window.innerHeight);
-
-  if (selectedText.trim().length > 0) {
-    const count = selectedText.length;
-
+  const selectionCount = getSelectionCount();
+  if (selectionCount > 0) {
     // すでに表示している要素があれば削除
     const oldPopup = document.getElementById("word-counter-popup");
     if (oldPopup) oldPopup.remove();
 
-    // ポップアップの表示位置を取得
-    chrome.storage.local.get(["position","toggle_figure","figure_number"], (result) => {
+    // マウスの位置を取得
+    const rect = getRect(startX, startY, event.clientX, event.clientY);
 
-      if (chrome.runtime.lastError) {
-        console.error("Error accessing chrome.storage:", chrome.runtime.lastError);
-        return;
-      }
-      console.log("Storage data:", result);
-      const position = result.position || "top";
-      const figure_number = result.figure_number || 0;
-      //文字数指定を管理する状態変数
-      const toggle_figure = result.toggle_figure || false;
-
+    // ローカルから設定を取得
+    getLocal((enableThreshold, threshold, position) => {
       let top, left;
       switch (position) {
         case "top":
-          top = `${event.clientY - 20}px`;
-          left = `${event.clientX - 10}px`;
+          top = `${rect.top - 20}px`;
+          left = `${rect.left}px`;
           break;
         case "bottom":
-          top = `${event.clientY + 10}px`;
-          left = `${event.clientX - 10}px`;
+          top = `${rect.bottom - 20}px`;
+          left = `${rect.right - 10}px`;
           break;
-        case "fixed":
+        case "center":
+          top = `${(rect.top + rect.bottom) / 2 - 10}px`;
+          left = `${(rect.left + rect.right) / 2 - 20}px`;
+          break;
+        default:
           top = "20px";
           left = "20px";
           break;
-        default:
-          top = `${window.innerHeight - 10}px`;
-          left = `${window.innerWidth - 10}px`;
-          break;
       }
+
       // ポップアップの作成
-      const popup = document.createElement("div");
-      popup.id = "word-counter-popup";
-      popup.textContent = `${count} 文字`;
-      popup.style.position = "fixed";
-      popup.style.top = top;
-      popup.style.left = left;
-
-      if(toggle_figure==false || figure_number==0){
-        popup.className = "word-counter-style" ;
-      }
-      else if(figure_number>count){
-        popup.className = "word-counter-style-figure-correct" ;
-
-      }else{
-        popup.className = "word-counter-style-figure-incorrect" ;
-      }
-    
-      console.log(popup);
+      const popup = createPopup(
+        top,
+        left,
+        selectionCount,
+        enableThreshold ? threshold : null
+      );
 
       document.body.appendChild(popup);
 

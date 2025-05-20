@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>文字カウンター</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Word Counter</h1>
+    </header>
+    <h2>
+      文字数指定
+      <label class="switch">
+        <input type="checkbox" id="threshold-switch" />
+        <span class="slider"></span>
+      </label>
+    </h2>
+
+    <input type="number" id="threshold-input" min="0" max="10000" />
+    <h2>ポップアップの表示位置</h2>
+
+    <select id="position-select">
+      <option value="top">左上</option>
+      <option value="center">中央</option>
+      <option value="bottom">右下</option>
+    </select>
+    <script src="../utils.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
