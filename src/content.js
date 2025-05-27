@@ -6,7 +6,8 @@ function createPopup(top, left, count, threshold) {
   popup.style.position = "fixed";
   popup.style.top = top;
   popup.style.left = left;
-  if (typeof threshold === "number") {
+
+  if (typeof threshold === "string") {
     if (count > threshold) {
       popup.style.backgroundColor = "#4caf50";
     } else {
