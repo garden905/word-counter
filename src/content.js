@@ -19,7 +19,15 @@ function createPopup(top, left, count, threshold) {
 function getSelectionCount() {
   const selection = window.getSelection();
   if (!selection) return 0;
-  return selection.toString().length;
+
+  // 選択されたテキストを取得
+  const text = selection.toString();
+
+  // 改行、半角・全角空白、タブ文字を削除
+  const cleanedText = text.replace(/[\r\n\s\u3000\t]/g, "");
+
+  // 残りの文字数を返す
+  return cleanedText.length;
 }
 
 function getRect(startX, startY, endX, endY) {
