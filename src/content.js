@@ -9,9 +9,9 @@ function createPopup(top, left, count, threshold) {
 
   if (typeof threshold === "string") {
     if (count > threshold) {
-      popup.style.backgroundColor = "#4caf50";
-    } else {
       popup.style.backgroundColor = "#f44336";
+    } else {
+      popup.style.backgroundColor = "#4caf50";
     }
   }
   return popup;
